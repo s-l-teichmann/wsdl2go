@@ -665,7 +665,7 @@ func (ge *goEncoder) writeSOAPFunc(w io.Writer, d *wsdl.Definitions, op *wsdl.Op
 		rpcStyle = d.Binding.BindingType.Style == "rpc"
 	}
 
-	ge.needsExtPkg["github.com/fiorix/wsdl2go/soap"] = true
+	ge.needsExtPkg["github.com/s-l-teichmann/wsdl2go/soap"] = true
 
 	// inputNames describe the accessors to the input parameter names
 	inputNames := make([]string, len(in))
@@ -1368,6 +1368,14 @@ func (ge *goEncoder) genGoStruct(w io.Writer, d *wsdl.Definitions, ct *wsdl.Comp
 func (ge *goEncoder) genGoOpStruct(w io.Writer, d *wsdl.Definitions, bo *wsdl.BindingOperation) error {
 	name := goSymbol(bo.Name)
 	function := ge.funcs[name]
+
+	if function == nil {
+		function = ge.funcs[bo.Name]
+	}
+
+	if function == nil {
+		return nil
+	}
 
 	if function.Input == nil {
 		log.Printf("function input is nil! %v is %v", name, function)
