@@ -25,7 +25,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/fiorix/wsdl2go/wsdl"
+	"github.com/s-l-teichmann/wsdl2go/wsdl"
 	"golang.org/x/net/html/charset"
 )
 
